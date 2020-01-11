@@ -1,0 +1,15 @@
+database
+*/*.pyc
+*/migrations
+*/__pycache__
+__pycache__
+env
+*.jpg
+*.jpeg
+*.png
+*.gif
+.vscode
+media/*
+# entry/secret.py
+.DS_Store
+redisdata
