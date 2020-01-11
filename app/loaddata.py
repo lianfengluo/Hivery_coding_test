@@ -17,6 +17,9 @@ with open("resources/companies.json") as json_file:
     for d in data:
       Companies(pk=d["index"], name=d["company"]).save()
 
+print("Finished loading companies data.", flush=True)
+print("Start loading people data.", flush=True)
+
 # load people info
 with open("resources/people.json") as json_file:
     data = json.load(json_file)
@@ -43,6 +46,8 @@ with open("resources/people.json") as json_file:
       except:
         # If the database structure is not compatible, then just skip.
         pass
+    print("Finished loading people data.", flush=True)
+    print("Start loading friends data.", flush=True)
     for d in data:
       try:
         p = People.objects.get(pk=d["index"])
@@ -52,3 +57,4 @@ with open("resources/people.json") as json_file:
         # if person is and invalid index do not do anything
         # Or index does not exist
         pass
+print("Finished data loading.", flush=True)
