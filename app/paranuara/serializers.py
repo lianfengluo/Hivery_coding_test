@@ -1,7 +1,6 @@
 from .models import *
 from rest_framework import serializers
 
-
 class EmployeeSerializer(serializers.ModelSerializer):
     """
     Serializer for the employee personal info
@@ -12,9 +11,9 @@ class EmployeeSerializer(serializers.ModelSerializer):
         return obj.get_gender_display()
 
     def to_representation(self, instance):
-         # instance is the model object. create the custom json format by accessing instance attributes normaly and return it
+         # convert the float point number back to the currency format
         representation = super(EmployeeSerializer, self).to_representation(instance)
-        representation["balance"] = "$" + str(instance.balance)
+        representation["balance"] = f"${instance.balance:,.2f}"
 
         return representation
 

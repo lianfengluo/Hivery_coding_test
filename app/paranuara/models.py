@@ -40,8 +40,7 @@ class People(models.Model):
     address = models.CharField(null=False, max_length=500)
     about = models.TextField(null=False)
     # If we want to store as the datetime
-    # registered = models.DateTimeField(null=False)
-    registered = models.CharField(null=False, max_length=100)
+    registered = models.DateTimeField(null=False)
     tags = ArrayField(
         base_field=models.CharField(max_length=30),
         size= 7,

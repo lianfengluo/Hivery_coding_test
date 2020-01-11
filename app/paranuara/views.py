@@ -23,7 +23,7 @@ class FoodInfoView(APIView):
         return Response(FoodInfoSerializer(person).data,
                         status=200)
         
-class BrownEyeCommonFriendsView(APIView):
+class SpecialCommonFriendsView(APIView):
     """
     /api/paranuara/special_common_friends/<int:pk1>/<int:pk2>/ (GET)
     Given 2 people id, the API will provide their information (Name, Age, Address, phone) 
@@ -37,12 +37,13 @@ class BrownEyeCommonFriendsView(APIView):
         # get the friend list
         # use cache to increase speed
         f_list = None
-        if cache.get(f"{person.pk}_friends", None):
-            f_list = cache.get(f"{person.pk}_friends")
+        if cache.get(f"{person.pk}_special_friends", None):
+            f_list = cache.get(f"{person.pk}_special_friends")
         else:
-            f_list = person.friends.all().values_list("id", flat=True)
-            # cache for a longer time
-            cache.set(f"{person.pk}_friends", f_list, 24 * 3600)
+            f_list = person.friends.filter(eyeColor="brown", 
+                                        has_died=False).values_list("id", flat=True)
+            # cache for a longer time 1 day
+            cache.set(f"{person.pk}_special_friends", f_list, 24 * 3600)
         return f_list
 
     def get_common_friends_id(self, list1, list2):
@@ -62,20 +63,20 @@ class BrownEyeCommonFriendsView(APIView):
             return Response("Invalid personal id.", status=400)
         f1_list = self.get_or_set_friends_cache(p1)
         f2_list = self.get_or_set_friends_cache(p2)
-        common_id_list = self.get_common_friends_id(f1_list, f2_list)
-        common_friends = self.queryset.filter(pk__in=common_id_list, eyeColor="brown",
-                                                has_died=False)
+        id_list = self.get_common_friends_id(f1_list, f2_list)
+        # retrieve the detail of these friends info
+        # common_friends = self.queryset.filter(pk__in=id_list)
         return Response({"person1": PersonalInfoSerializer(p1).data,
                         "person2": PersonalInfoSerializer(p2).data,
                         # retrieve the detail of these common friends info
-                        # "common_friends": PersonalInfoSerializer(common_friends, many=True).data
+                        # "special_common_friends": PersonalInfoSerializer(common_friends, many=True).data
                         # retrieve just the id of these friends
-                        "common_friends": common_friends.values_list("id", flat=True)
+                        "special_common_friends": id_list
                         }, 
                         status=200)
 
 
-class CompanyEmployeeView(APIView):
+class CompanyEmployeesInfoView(APIView):
     """
     /api/paranuara/company_employees/<int:company_id>/ (GET)
     Given a company id, the API returns all their employees info. 
