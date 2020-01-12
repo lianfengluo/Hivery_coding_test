@@ -57,7 +57,7 @@ MY_SECRET_KEY can be generate by simply run the `generate.py` file in app direct
 ## API description
 
 `1. /api/paranuara/v1/company_employees/<int:company_id>/ (GET)`\
-Given a company id, the API returns all their employees info. \
+Given a company id, the API returns all their employees' id. \
 `2. /api/paranuara/v1/special_common_friends/<int:people_id1>/<int:people_id12>/ (GET)`\
 Given 2 people id, the API will provide their information (Name, Age, Address, phone) and the list of their friends in common which have brown eyes and are still alive.\
 `3. /api/paranuara/v1/food_info/<int:people_id1>/ (GET)`\

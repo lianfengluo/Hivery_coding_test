@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import *
 from .serializers import *
+from .utils import get_common_element
 
 
 class FoodInfoView(APIView):
@@ -45,12 +46,9 @@ class SpecialCommonFriendsView(APIView):
         else:
             f_list = person.friends.filter(eyeColor="brown",
                                            has_died=False).values_list("id", flat=True)
-            # cache for a longer time 1 day
+            # cache for a longer time (1 day)
             cache.set(f"{person.pk}_special_friends", f_list, 24 * 3600)
         return f_list
-
-    def get_common_friends_id(self, list1, list2):
-        return set(list1).intersection(list2)
 
     def get(self, request, pk1, pk2, format=None):
         try:
@@ -60,7 +58,7 @@ class SpecialCommonFriendsView(APIView):
             return Response("Invalid personal id.", status=400)
         f1_list = self.get_or_set_friends_cache(p1)
         f2_list = self.get_or_set_friends_cache(p2)
-        id_list = self.get_common_friends_id(f1_list, f2_list)
+        id_list = get_common_element(f1_list, f2_list)
         # retrieve the detail of these friends info
         # common_friends = self.queryset.filter(pk__in=id_list)
         return Response({"person1": PersonalInfoSerializer(p1).data,
@@ -77,7 +75,7 @@ class CompanyEmployeesInfoView(APIView):
     """
     `/api/paranuara/v1/company_employees/<int:company_id>/ (GET)`
 
-    Given a company id, the API returns all their employees info. 
+    Given a company id, the API returns all their employees' id. 
     """
     permission_classes = (AllowAny,)
     queryset = Companies.objects.all()
