@@ -2,6 +2,7 @@ import dateutil.parser
 import json
 from paranuara.models import *
 import datetime
+import re
 
 
 food_type = {}
@@ -35,7 +36,7 @@ with open("resources/people.json") as json_file:
           fruits.append(food)
       try:
         People(pk=d["index"], _id=d["_id"], guid=d["guid"], has_died=d["has_died"], 
-              balance=float(d["balance"][1:].replace(",", "")), picture=d["picture"], age=d["age"], 
+              balance=float(re.sub(r'[^\d.]', '', d["balance"])), picture=d["picture"], age=d["age"], 
               eyeColor=d["eyeColor"], name=d["name"], 
               gender="f" if d["gender"][0] == "f" else "m", 
               company_id=d["company_id"], email=d["email"], phone=d["phone"], 

@@ -44,7 +44,7 @@ MY_SECRET_KEY can be generate by simply run the `generate.py` file in app direct
 ### Run
 - Use `docker-compose up` to create and start the docker containers (It may take time to run).
 - Endpoint will be started at http://localhost:9000. 
-- Stop just press `ctrl+c`<br>
+- To stop just press `ctrl+c`. If error occur in stop, then use `docker-compose down` to stop<br>
 
 <b>Note: During this setup, the django project will run the migration script and load the data from `resources
 `.</b>
