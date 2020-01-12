@@ -9,10 +9,9 @@ from .serializers import *
 
 class FoodInfoView(APIView):
     """
-    /api/paranuara/v1/food_info/<int:pk>/ (GET)
+    `/api/paranuara/v1/food_info/<int:pk> (GET)`
 
-    Given 1 people, the API will provide a list of fruits 
-    and vegetables they like.
+    Given 1 people, the API will provide a list of fruits and vegetables they like.
     """
     permission_classes = (AllowAny,)
     queryset = People.objects.all()
@@ -28,7 +27,7 @@ class FoodInfoView(APIView):
 
 class SpecialCommonFriendsView(APIView):
     """
-    /api/paranuara/v1/special_common_friends/<int:pk1>/<int:pk2>/ (GET)
+    `/api/paranuara/v1/special_common_friends/<int:pk1>/<int:pk2>/ (GET)`
 
     Given 2 people id, the API will provide their information (Name, Age, Address, phone) 
     and the list of their friends in common 
@@ -76,7 +75,7 @@ class SpecialCommonFriendsView(APIView):
 
 class CompanyEmployeesInfoView(APIView):
     """
-    /api/paranuara/v1/company_employees/<int:company_id>/ (GET)
+    `/api/paranuara/v1/company_employees/<int:company_id>/ (GET)`
 
     Given a company id, the API returns all their employees info. 
     """

@@ -56,7 +56,8 @@ Given a company id, the API returns all their employees info. \
 `2. /api/paranuara/v1/special_common_friends/<int:pk1>/<int:pk2>/ (GET)`\
 Given 2 people id, the API will provide their information (Name, Age, Address, phone) and the list of their friends in common which have brown eyes and are still alive.\
 `3. /api/paranuara/v1/food_info/<int:pk>/ (GET)`\
-Given 1 people, the API will provide a list of fruits and vegetables they like.
+Given 1 people, the API will provide a list of fruits and vegetables they like.\
+<b>This api description can be improved readiability by adding the `Swagger UI`.</b>
 
 ## run test
 1. Go into the shell of the docker using `docker exec -it hivery_coding_test_app sh`. `hivery_coding_test_app` is the name of the docker container;
