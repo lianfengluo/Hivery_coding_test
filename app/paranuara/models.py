@@ -32,9 +32,9 @@ class People(models.Model):
     gender = models.CharField(
         max_length=1, choices=Genders, null=False)
     company = models.ForeignKey(Companies,
-                                null=False,
+                                null=True,
                                 db_constraint=False,
-                                on_delete=models.CASCADE)
+                                on_delete=models.SET_NULL)
     email = models.EmailField(null=False)
     phone = models.CharField(null=False, max_length=50)
     address = models.CharField(null=False, max_length=500)

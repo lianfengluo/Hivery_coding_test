@@ -42,9 +42,9 @@ MY_SECRET_KEY can be generate by simply run the `generate.py` file in app direct
 <b>Note: `.env` provided is used as example.</b> 
 
 ### Run
-1. Use `docker-compose up` to create and start the docker containers (It may take time to run).
-2. Endpoint will be started at http://localhost:9000. 
-3. Stop just press `ctrl+c`<br>
+- Use `docker-compose up` to create and start the docker containers (It may take time to run).
+- Endpoint will be started at http://localhost:9000. 
+- Stop just press `ctrl+c`<br>
 
 <b>Note: During this setup, the django project will run the migration script and load the data from `resources
 `.</b>
@@ -57,6 +57,12 @@ Given a company id, the API returns all their employees info. \
 Given 2 people id, the API will provide their information (Name, Age, Address, phone) and the list of their friends in common which have brown eyes and are still alive.\
 `3. /api/paranuara/food_info/<int:pk>/ (GET)`\
 Given 1 people, the API will provide a list of fruits and vegetables they like.
+
+## Techniques
+- Using `Docker` with `docker-compose` to setup the environment;
+- App: using `django` with `djangorestframework` to build the api;
+- Database: using `postgresql` as the app database;
+- Cache: using `Redis` to do the data caching.
 
 
 ## License
