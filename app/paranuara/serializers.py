@@ -1,18 +1,20 @@
 from .models import *
 from rest_framework import serializers
 
+
 class EmployeeSerializer(serializers.ModelSerializer):
     """
-    Serializer for the employee personal info
+    Serializer for the employee personal info with all fields
     """
     gender = serializers.SerializerMethodField()
 
-    def get_gender(self,obj):
+    def get_gender(self, obj):
         return obj.get_gender_display()
 
     def to_representation(self, instance):
          # convert the float point number back to the currency format
-        representation = super(EmployeeSerializer, self).to_representation(instance)
+        representation = super(
+            EmployeeSerializer, self).to_representation(instance)
         representation["balance"] = f"${instance.balance:,.2f}"
 
         return representation
@@ -21,11 +23,13 @@ class EmployeeSerializer(serializers.ModelSerializer):
         model = People
         fields = "__all__"
 
+
 class PersonalInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = People
         fields = ("name", "age", "address", "phone",)
+
 
 class FoodInfoSerializer(serializers.ModelSerializer):
     """
@@ -35,7 +39,8 @@ class FoodInfoSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         #  convert the age from int type to str type
-        representation = super(FoodInfoSerializer, self).to_representation(instance)
+        representation = super(
+            FoodInfoSerializer, self).to_representation(instance)
         representation["age"] = str(instance.age)
 
         return representation

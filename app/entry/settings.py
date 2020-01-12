@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = MY_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if os.environ.get("DJANGO_DEBUG") == "false" else True 
+DEBUG = False if os.environ.get("DJANGO_DEBUG") == "false" else True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'rest_framework',
     'django.contrib.auth',
+    'django.contrib.staticfiles',
     # 'rest_framework.authtoken',
     'paranuara',
 ]
@@ -99,7 +100,7 @@ DATABASES = {
                 'TEST': {
                     'NAME': "test",
                 },
-            }
+                }
 }
 
 # Setting the database backend
@@ -149,5 +150,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-MEDIA_URL = r'/media/'
+# MEDIA_URL = r'/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = r'/static/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]

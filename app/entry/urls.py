@@ -12,4 +12,4 @@ from django.conf.urls.static import static
 # router:
 urlpatterns = [
     path(r"api/paranuara/v1/", include("paranuara.urls")),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

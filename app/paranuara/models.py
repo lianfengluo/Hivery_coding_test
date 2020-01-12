@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 
+
 class Companies(models.Model):
     """
     Model for the company table
@@ -12,6 +13,7 @@ class Companies(models.Model):
     class Meta:
         db_table = "Companies"
         verbose_name_plural = "Companies"
+
 
 class People(models.Model):
     """
@@ -43,7 +45,7 @@ class People(models.Model):
     registered = models.DateTimeField(null=False)
     tags = ArrayField(
         base_field=models.CharField(max_length=30),
-        size= 7,
+        size=7,
         max_length=(7 * 31)  # 7 * 30 character nominals, plus commas
     )
     greeting = models.CharField(max_length=300)
@@ -62,4 +64,3 @@ class People(models.Model):
     class Meta:
         db_table = "People"
         verbose_name_plural = "People"
-

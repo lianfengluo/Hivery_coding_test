@@ -59,7 +59,7 @@ Given 2 people id, the API will provide their information (Name, Age, Address, p
 Given 1 people, the API will provide a list of fruits and vegetables they like.
 
 ## run test
-1. Go into the shell of the docker using `docker exec -it hivery_coding_test_app_1 sh`. `hivery_coding_test_app_1` is the name of the docker container;
+1. Go into the shell of the docker using `docker exec -it hivery_coding_test_app sh`. `hivery_coding_test_app` is the name of the docker container;
 2. Run command `python manage.py dumpdata paranuara --format=json > fixture.json` to get the fixture data from the database;
 3. Run command `python manage.py test` to test the result
 

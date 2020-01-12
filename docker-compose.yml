@@ -23,6 +23,7 @@ services:
       - ./redisdata:/redisdata
   app:
     restart: always
+    container_name: hivery_coding_test_app
     build: ./app
     env_file: .env
     environment:
