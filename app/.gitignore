@@ -15,4 +15,4 @@ media/*
 # entry/secret.py
 .DS_Store
 redisdata
-static/*
+static

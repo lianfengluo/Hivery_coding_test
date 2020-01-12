@@ -4,7 +4,7 @@
   {"food": "celery", "kind": "vegetable"},
   {"food": "strawberry", "kind": "fruit"},
   {"food": "carrot", "kind": "vegetable"},
-  {"food": "cucumber", "kind": "vegetable"},
+  {"food": "cucumber", "kind": "fruit"},
   {"food": "orange", "kind": "fruit"},
   {"food": "banana", "kind": "fruit"}
   ]

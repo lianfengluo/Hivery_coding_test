@@ -88,13 +88,12 @@ class CompanyEmployeesInfoView(APIView):
         except Companies.DoesNotExist:
             return Response("Invalid company id", status=400)
         employees_id = cache.get(f"company_{company_id}")
-        if employees_id:
-            employees = People.objects.filter(pk__in=employees_id)
-        else:
+        if not employees_id:
             employees = People.objects.filter(company__id=company_id)
             employees_id = employees.values_list("id", flat=True)
             cache.set(f"company_{company_id}", employees_id)
-        # This will return all the detail info of the employees
-        # If we just need the index then just response the employees_id previously got
-        serializer = EmployeeSerializer(employees, many=True)
-        return Response(serializer.data, status=200)
+        return Response(employees_id, status=200)
+        # if we want to get the detail info of employee just uncomment the code below and change the Response
+        # employees = People.objects.filter(pk__in=employees_id)
+        # serializer = EmployeeSerializer(employees, many=True)
+        # return Response(serializer.data, status=200)

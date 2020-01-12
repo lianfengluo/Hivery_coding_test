@@ -41,8 +41,7 @@ class ApiTest(TestCase):
         for i, company_id in enumerate(random_company_id_list):
             response = self.client.get(
                 f'/api/paranuara/v1/company_employees/{company_id}/')
-            response_people_indices = set(
-                map(lambda x: x["id"], json.loads(response.content)))
+            response_people_indices = set(json.loads(response.content))
             self.assertEqual(response_people_indices,
                              set(employees_id_list[i]))
 

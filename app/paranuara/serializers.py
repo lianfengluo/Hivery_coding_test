@@ -1,7 +1,7 @@
 from .models import *
 from rest_framework import serializers
 
-
+# This class is for fully employee's info
 class EmployeeSerializer(serializers.ModelSerializer):
     """
     Serializer for the employee personal info with all fields
