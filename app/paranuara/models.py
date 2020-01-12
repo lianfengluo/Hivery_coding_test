@@ -24,10 +24,10 @@ class People(models.Model):
     _id = models.CharField(null=False, max_length=24)
     guid = models.CharField(null=False, max_length=36)
     has_died = models.BooleanField(null=False)
-    balance = models.FloatField(null=False)
+    balance = models.FloatField(default=0.0)
     picture = models.URLField(max_length=300)
-    age = models.IntegerField(null=False)
-    eyeColor = models.CharField(null=False, max_length=20)
+    age = models.IntegerField()
+    eyeColor = models.CharField(max_length=20)
     name = models.CharField(null=False, max_length=100)
     gender = models.CharField(
         max_length=1, choices=Genders, null=False)
@@ -38,7 +38,7 @@ class People(models.Model):
     email = models.EmailField(null=False)
     phone = models.CharField(null=False, max_length=50)
     address = models.CharField(null=False, max_length=500)
-    about = models.TextField(null=False)
+    about = models.TextField()
     # If we want to store as the datetime
     registered = models.DateTimeField(null=False)
     tags = ArrayField(
@@ -46,13 +46,13 @@ class People(models.Model):
         size= 7,
         max_length=(7 * 31)  # 7 * 30 character nominals, plus commas
     )
-    greeting = models.CharField(null=False, max_length=300)
+    greeting = models.CharField(max_length=300)
+    friends = models.ManyToManyField("self", symmetrical=False)
     vegetables = ArrayField(
         base_field=models.CharField(max_length=20),
         size=4,
         max_length=(4 * 21)  # 4 * 20 character nominals, plus commas
     )
-    friends = models.ManyToManyField("self", symmetrical=False)
     fruits = ArrayField(
         base_field=models.CharField(max_length=20),
         size=4,
