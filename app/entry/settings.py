@@ -47,6 +47,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
     # "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
     ]
@@ -94,7 +95,11 @@ DATABASES = {
                 'NAME': DATABAE_NAME,     # <DATABAE_NAME>
                 'USER': DATABAE_USERNAME,     # <DATABAE_USERNAME>
                 'PASSWORD': DATABASE_PASSWORD,  # <DATABASE_PASSWORD>
-                'PORT': 5432}
+                'PORT': 5432,
+                'TEST': {
+                    'NAME': "test",
+                },
+            }
 }
 
 # Setting the database backend

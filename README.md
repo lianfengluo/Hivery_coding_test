@@ -44,19 +44,24 @@ MY_SECRET_KEY can be generate by simply run the `generate.py` file in app direct
 ### Run
 - Use `docker-compose up` to create and start the docker containers (It may take time to run).
 - Endpoint will be started at http://localhost:9000. 
-- To stop just press `ctrl+c`. If error occur in stop, then use `docker-compose down` to stop<br>
+- To stop just press `ctrl+c`. If error occur in stop, then use `docker-compose down` to stop.<br>
 
 <b>Note: During this setup, the django project will run the migration script and load the data from `resources
 `.</b>
 
 
 ## API description
-`1. /api/paranuara/company_employees/<int:company_id>/ (GET)`\
+`1. /api/paranuara/v1/company_employees/<int:company_id>/ (GET)`\
 Given a company id, the API returns all their employees info. \
-`2. /api/paranuara/special_common_friends/<int:pk1>/<int:pk2>/ (GET)`\
+`2. /api/paranuara/v1/special_common_friends/<int:pk1>/<int:pk2>/ (GET)`\
 Given 2 people id, the API will provide their information (Name, Age, Address, phone) and the list of their friends in common which have brown eyes and are still alive.\
-`3. /api/paranuara/food_info/<int:pk>/ (GET)`\
+`3. /api/paranuara/v1/food_info/<int:pk>/ (GET)`\
 Given 1 people, the API will provide a list of fruits and vegetables they like.
+
+## run test
+1. Go into the shell of the docker using `docker exec -it hivery_coding_test_app_1 sh`. `hivery_coding_test_app_1` is the name of the docker container;
+2. Run command `python manage.py dumpdata paranuara --format=json > fixture.json` to get the fixture data from the database;
+3. Run command `python manage.py test` to test the result
 
 ## Techniques
 - Using `Docker` with `docker-compose` to setup the environment;

@@ -11,5 +11,5 @@ from django.conf.urls.static import static
 
 # router:
 urlpatterns = [
-    path(r"api/paranuara/", include("paranuara.urls")),
+    path(r"api/paranuara/v1/", include("paranuara.urls")),
 ]

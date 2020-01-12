@@ -8,7 +8,7 @@ import os
 
 class FoodInfoView(APIView):
     """
-    /api/paranuara/food_info/<int:pk>/ (GET)
+    /api/paranuara/v1/food_info/<int:pk>/ (GET)
     Given 1 people, the API will provide a list of fruits 
     and vegetables they like.
     """
@@ -25,7 +25,7 @@ class FoodInfoView(APIView):
         
 class SpecialCommonFriendsView(APIView):
     """
-    /api/paranuara/special_common_friends/<int:pk1>/<int:pk2>/ (GET)
+    /api/paranuara/v1/special_common_friends/<int:pk1>/<int:pk2>/ (GET)
     Given 2 people id, the API will provide their information (Name, Age, Address, phone) 
     and the list of their friends in common 
     which have brown eyes and are still alive.
@@ -47,13 +47,7 @@ class SpecialCommonFriendsView(APIView):
         return f_list
 
     def get_common_friends_id(self, list1, list2):
-        # base on the length to do the fast hash lookup
-        if len(list1) > len(list2):
-            s = set(list1)
-            return list(filter(lambda x: x in s, list2))
-        else:
-            s = set(list2)
-            return list(filter(lambda x: x in s, list1))
+        return set(list1).intersection(list2)
 
     def get(self, request, pk1, pk2, format=None):
         try:
@@ -78,7 +72,7 @@ class SpecialCommonFriendsView(APIView):
 
 class CompanyEmployeesInfoView(APIView):
     """
-    /api/paranuara/company_employees/<int:company_id>/ (GET)
+    /api/paranuara/v1/company_employees/<int:company_id>/ (GET)
     Given a company id, the API returns all their employees info. 
     """
     permission_classes = (AllowAny,)

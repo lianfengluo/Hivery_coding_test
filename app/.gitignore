@@ -9,6 +9,7 @@ env
 *.png
 *.gif
 .vscode
+test.json
 media/*
 # entry/secret.py
 .DS_Store
