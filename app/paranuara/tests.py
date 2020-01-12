@@ -24,9 +24,9 @@ class ApiTest(TestCase):
                 self.food_type[d["food"]] = d["kind"]
 
     def test_companies_employee(self):
-        # print("start testing /api/paranuara/v1/company_employees/company_id/", flush=True)
-        # random test 10 time
-        num_of_test = 10
+        # print("start testing /api/paranuara/v1/company_employees/<int:company_id>/", flush=True)
+        # random test 10 time if the length of the companies list greater or equal to 10
+        num_of_test = 10 if len(self.companies) > 10 else len(self.companies)
         random_company_id_list = []
         while len(random_company_id_list) < num_of_test:
             index = random.choice(self.companies)["index"]
@@ -47,7 +47,7 @@ class ApiTest(TestCase):
                              set(employees_id_list[i]))
 
     def test_special_friends(self):
-        # print("Start testing /api/paranuara/v1/special_common_friends/<int:pk1>/<int:pk2>/", flush=True)
+        # print("Start testing /api/paranuara/v1/special_common_friends/<int:people_id1>/<int:people_id2>/", flush=True)
         num_of_test = 10
         random_people_pair_list = [(random.choice(self.people),
                                     random.choice(self.people)) for _ in range(num_of_test)]
@@ -63,16 +63,16 @@ class ApiTest(TestCase):
                      "phone": r_p2["phone"]}
             self.assertEqual(resp["person1"], info1)
             self.assertEqual(resp["person2"], info2)
-            for f in resp["special_common_friends"]:
-                self.assertEqual(People.objects.get(pk=f).eyeColor, "brown")
-                self.assertEqual(People.objects.get(pk=f).has_died, False)
-            common_friends = set(map(lambda x: x["index"], r_p1["friends"])).intersection(
-                map(lambda x: x["index"], r_p2["friends"]))
-            self.assertEqual(set(resp["special_common_friends"]).issubset(common_friends),
-                             True)
+            r_p1_s_f = People.objects.filter(pk__in=set(map(lambda x: x["index"], r_p1["friends"])),
+                                             eyeColor="brown", has_died=False).values_list("id", flat=True)
+            r_p2_s_f = People.objects.filter(pk__in=set(map(lambda x: x["index"], r_p2["friends"])),
+                                             eyeColor="brown", has_died=False).values_list("id", flat=True)
+            special_common_friends = set(r_p1_s_f).intersection(r_p2_s_f)
+            self.assertEqual(
+                set(resp["special_common_friends"]), special_common_friends)
 
     def test_favourite_fruit(self):
-        # print("Start testing /api/paranuara/v1/food_info/<int:pk>/", flush=True)
+        # print("Start testing /api/paranuara/v1/food_info/<int:people_id>/", flush=True)
         num_of_test = 10
         random_people_list = [random.choice(
             self.people) for _ in range(num_of_test)]
