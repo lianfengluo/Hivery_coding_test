@@ -100,6 +100,8 @@ The description of food classes is
 | ------------------- | ----------------------------------------------------------------------------- |
 | Django              | [BSD](https://github.com/django/django/blob/master/LICENSE)                   |
 | djangorestframework | [BSD](https://github.com/encode/django-rest-framework/blob/master/LICENSE.md) |
+| python-dateutil     | [BSD](https://github.com/dateutil/dateutil/blob/master/LICENSE)               |
 | django-cors-headers | [LICENSE](https://github.com/ottoyiu/django-cors-headers/blob/master/LICENSE) |
 | psycopg2-binary     | [LICENSE](https://github.com/psycopg/psycopg2/blob/master/LICENSE)            |
 | django-redis        | [LICENSE](https://github.com/niwinz/django-redis/blob/master/LICENSE)         |
+| Markdown            | [LICENSE](https://github.com/Python-Markdown/markdown/blob/master/LICENSE.md) |

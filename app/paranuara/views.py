@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import *
 from .serializers import *
-from .utils import get_common_element
+from .utils import get_common_elements
 
 
 class FoodInfoView(APIView):
@@ -58,7 +58,7 @@ class SpecialCommonFriendsView(APIView):
             return Response("Invalid personal id.", status=400)
         f1_list = self.get_or_set_friends_cache(p1)
         f2_list = self.get_or_set_friends_cache(p2)
-        id_list = get_common_element(f1_list, f2_list)
+        id_list = get_common_elements(f1_list, f2_list)
         # retrieve the detail of these friends info
         # common_friends = self.queryset.filter(pk__in=id_list)
         return Response({"person1": PersonalInfoSerializer(p1).data,
