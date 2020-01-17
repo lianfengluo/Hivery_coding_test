@@ -13,8 +13,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
          # convert the float point number back to the currency format
-        representation = super(
-            EmployeeSerializer, self).to_representation(instance)
+        representation = super().to_representation(instance)
         representation["balance"] = f"${instance.balance:,.2f}"
 
         return representation
@@ -39,8 +38,7 @@ class FoodInfoSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         #  convert the age from int type to str type
-        representation = super(
-            FoodInfoSerializer, self).to_representation(instance)
+        representation = super().to_representation(instance)
         representation["age"] = str(instance.age)
 
         return representation

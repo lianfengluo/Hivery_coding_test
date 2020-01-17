@@ -41,7 +41,7 @@ class SpecialCommonFriendsView(APIView):
         # get the friend list
         # use cache to increase speed
         f_list = None
-        if cache.get(f"{person.pk}_special_friends", None):
+        if cache.get(f"{person.pk}_special_friends", None) is not None:
             f_list = cache.get(f"{person.pk}_special_friends")
         else:
             f_list = person.friends.filter(eyeColor="brown",
@@ -85,8 +85,8 @@ class CompanyEmployeesInfoView(APIView):
             self.queryset.get(pk=company_id)
         except Companies.DoesNotExist:
             return Response("Invalid company id", status=400)
-        employees_id = cache.get(f"company_{company_id}")
-        if not employees_id:
+        employees_id = cache.get(f"company_{company_id}", None)
+        if employees_id is None:
             employees = People.objects.filter(company__id=company_id)
             employees_id = employees.values_list("id", flat=True)
             cache.set(f"company_{company_id}", employees_id)
